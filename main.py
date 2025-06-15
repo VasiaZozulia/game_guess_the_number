@@ -33,14 +33,14 @@ tips = {
     'input_number_error' : 'Please enter the whole number!',
 }
 
-# Randomly select a number between the specified range
-random_number = random.randint(guess_range[0], guess_range[1])
+# Checking if the guess range is within the correct bounds.
+try:
+    # Randomly select a number between the specified range
+    random_number = random.randint(guess_range[0], guess_range[1])
 
-print ("Welcome to the game 'Guess the Number.'")
-print (f"I’ve picked a number between {guess_range[0]} and {guess_range[1]}. You have {tries} tries to guess it. Let's play!")
+    print ("Welcome to the game 'Guess the Number.'")
+    print (f"I’ve picked a number between {guess_range[0]} and {guess_range[1]}. You have {tries} tries to guess it. Let's play!")
 
-# Checking if the guess range is within the correct bounds. "
-if guess_range[0] < guess_range[1]:
     # Start the game
     while tries > 0:
         try:
@@ -48,5 +48,6 @@ if guess_range[0] < guess_range[1]:
         except ValueError:
             print (tips['input_number_error'])
             continue
-else:
+
+except ValueError:
     print (tips['range_error'])
