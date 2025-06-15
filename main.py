@@ -33,6 +33,9 @@ tips = {
     'input_number_error' : 'Please enter the whole number!',
 }
 
+# The result of the game
+game_result = False
+
 # Checking if the guess range is within the correct bounds.
 try:
     # Randomly select a number between the specified range
@@ -48,6 +51,28 @@ try:
         except ValueError:
             print (tips['input_number_error'])
             continue
+
+        # Checking if the user's number is within the correct bounds.
+        if guess < guess_range[0] or guess > guess_range[1]:
+            print (f"The number should be between {guess_range[0]} and {guess_range[1]}")
+            continue
+
+        # Checking if the user's input number equal random number
+        if guess == random_number:
+            print (f"{tips['win']}. The number was {random_number}.")
+            game_result = True
+            break
+        elif guess < random_number:
+            print (f"{tips['small']}.")
+        else:
+            print (f"{tips['big']}.")
+
+        # User attempts decrease each time they try to guess the number.
+        tries -= 1
+        print (f"{tries} tries left! Try again!")
+
+    if not game_result:
+        print (f"{tips['loss']} The number was {random_number}.")
 
 except ValueError:
     print (tips['range_error'])
